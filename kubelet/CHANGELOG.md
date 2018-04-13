@@ -1,14 +1,13 @@
 # CHANGELOG - kubelet
 
 1.1.9/ Unreleased
-==================
 
 ### Changes
 
 * [FEATURE] Reports nanocores instead of cores.
 
 
-1.1.0/ 2018-03-23
+1.1.0 / 2018-03-23
 ==================
 
 ### Changes
