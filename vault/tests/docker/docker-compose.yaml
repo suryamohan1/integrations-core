@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+
+  vault:
+    image: vault:latest
+    container_name: vault_dev
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["docker-entrypoint.sh server -dev 2> /vault/logs/output.log"]
+    volumes:
+      - ./vault.log:/vault/logs/output.log
+    cap_add:
+      - IPC_LOCK
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=myroot
+      - VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:1234
+    ports:
+      - "8200:1234"
