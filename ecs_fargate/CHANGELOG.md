@@ -6,6 +6,7 @@
 ### Changes
 
 * [FIX] update the metadata collected from Version to Revision.
+* [FIX] update the metadata of the cpu.user and cpu.system metrics from gauges to rates.
 
 1.1.0/ 2018-03-23
 ==================
