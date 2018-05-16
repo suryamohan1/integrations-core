@@ -44,13 +44,24 @@ The Couchbase check is packaged with the Agent, so simply [install the Agent][1]
 See [metadata.csv][5] for a list of metrics provided by this integration.
 
 ### Events
-The Couchbase check does not include any event at this time.
+
+The Couchbase check emits an event to Datadog each time the cluster rebalances.
 
 ### Service Checks
 
-`couchbase.can_connect`:
+- `couchbase.can_connect`:
 
 Returns `Critical` if the Agent cannot connect to Couchbase to collect metrics.
+
+- `couchbase.by_node.cluster_membership`:
+
+Returns `Critical` if the node failed over.
+Returns `Warning` if the node is added to the cluster but is waiting for a rebalance.
+Returns `Ok` otherwise.
+
+- `couchbase.by_node.health_status`:
+
+Returns `Critical` if the node is unhealthy. Returns `Ok` otherwise.
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][6].
