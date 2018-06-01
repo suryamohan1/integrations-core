@@ -9,7 +9,7 @@ import re
 # project
 from datadog_checks.checks import AgentCheck
 from datadog_checks.utils.tailfile import TailFile
-from datadog_checks.utils.common import get_agent_version
+from datadog_checks.utils.common import get_version
 
 # fields order for each event type, as named tuples
 EVENT_FIELDS = {
@@ -378,7 +378,7 @@ class NagiosPerfDataTailer(NagiosTailer):
 
                 # If the Agent version is less than 6, we do not support passing in a timestamp argument for metrics
                 #   submission
-                agent_version = get_agent_version
+                agent_version = get_version()
                 if int(agent_version[0]) < 6:
                     timestamp = data.get('TIMET', None)
                     if timestamp is not None:
