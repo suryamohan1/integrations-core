@@ -7,8 +7,9 @@ from collections import namedtuple
 import re
 
 # project
-from checks import AgentCheck
-from utils.tailfile import TailFile
+from datadog_checks.checks import AgentCheck
+from datadog_checks.utils.tailfile import TailFile
+from datadog_checks.utils.common import get_agent_version
 
 # fields order for each event type, as named tuples
 EVENT_FIELDS = {
@@ -351,9 +352,6 @@ class NagiosPerfDataTailer(NagiosTailer):
                     pair_data = pair_match.groupdict()
 
                 label = pair_data['label']
-                timestamp = data.get('TIMET', None)
-                if timestamp is not None:
-                    timestamp = (int(float(timestamp)) / self._freq) * self._freq
                 value = float(pair_data['value'])
                 device_name = None
 
@@ -378,7 +376,16 @@ class NagiosPerfDataTailer(NagiosTailer):
                     if attr_val is not None and attr_val != '':
                         tags.append("{0}:{1}".format(key, attr_val))
 
-                self._gauge(metric, value, tags + self._tags, host_name, device_name, timestamp)
+                # If the Agent version is less than 6, we do not support passing in a timestamp argument for metrics
+                #   submission
+                agent_version = get_agent_version
+                if int(agent_version[0]) < 6:
+                    timestamp = data.get('TIMET', None)
+                    if timestamp is not None:
+                        timestamp = (int(float(timestamp)) / self._freq) * self._freq
+                    self._gauge(metric, value, tags + self._tags, host_name, device_name, timestamp)
+                else:
+                    self._gauge(metric, value, tags + self._tags, host_name, device_name)
 
 
 class NagiosHostPerfDataTailer(NagiosPerfDataTailer):
