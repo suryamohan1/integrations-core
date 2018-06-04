@@ -32,9 +32,6 @@ class Sess:
         except Exception as e:
             self.log.warning("Error making request: {0}".format(e))
             raise
-        path_save = path.replace('/', '_')
-        path_save = path_save.replace('?', '_')
-        path_save = path_save.replace('&', '_')
         try:
             if raw_response:
                 return response
