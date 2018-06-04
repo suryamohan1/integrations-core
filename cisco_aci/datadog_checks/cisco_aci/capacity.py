@@ -7,6 +7,9 @@ from . import helpers
 
 
 class Capacity:
+    """
+    Collect capacity metrics from the APIC
+    """
 
     def __init__(self, check, api, instance):
         self.check = check

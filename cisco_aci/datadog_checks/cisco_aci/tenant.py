@@ -10,6 +10,10 @@ from . import helpers
 
 
 class Tenant:
+    """
+    Collect tenant metrics from the APIC
+    """
+
     def __init__(self, check, api, instance, instance_hash):
         self.check = check
         self.api = api

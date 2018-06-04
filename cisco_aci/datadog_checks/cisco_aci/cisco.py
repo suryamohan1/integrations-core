@@ -4,10 +4,7 @@
 
 import datetime
 
-try:
-    from datadog_checks.checks import AgentCheck
-except ImportError:
-    from checks import AgentCheck
+from datadog_checks.checks import AgentCheck
 
 try:
     from datadog_checks.utils.containers import hash_mutable
@@ -24,6 +21,8 @@ from .tags import CiscoTags
 from .api import Api
 
 SOURCE_TYPE = 'cisco_aci'
+
+SERVICE_CHECK_NAME = 'cisco_aci.can_connect'
 
 
 class CiscoACICheck(AgentCheck):
@@ -71,7 +70,7 @@ class CiscoACICheck(AgentCheck):
             api.login()
         except Exception as e:
             self.log.exception("Cannot login to the Cisco ACI: {}".format(e))
-            self.service_check('cisco_aci.can_connect',
+            self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
                                "aci login returned a status of {}".format(e),
                                tags=service_check_tags)
@@ -84,7 +83,7 @@ class CiscoACICheck(AgentCheck):
             tenant.collect()
         except Exception as e:
             self.log.info('tenant collection failed: {}'.format(e))
-            self.service_check('cisco_aci.can_connect',
+            self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
                                "aci tenant operations failed, returning a status of {}".format(e),
                                tags=service_check_tags)
@@ -96,7 +95,7 @@ class CiscoACICheck(AgentCheck):
             fabric.collect()
         except Exception as e:
             self.log.info('fabric collection failed: {}'.format(e))
-            self.service_check('cisco_aci.can_connect',
+            self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
                                "aci fabric operations failed, returning a status of {}".format(e),
                                tags=service_check_tags)
@@ -108,14 +107,14 @@ class CiscoACICheck(AgentCheck):
             capacity.collect()
         except Exception as e:
             self.log.info('capacity collection failed: {}'.format(e))
-            self.service_check('cisco_aci.can_connect',
+            self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
                                "aci capacity operations failed, returning a status of {}".format(e),
                                tags=service_check_tags)
             api.close()
             raise
 
-        self.service_check('cisco_aci.can_connect',
+        self.service_check(SERVICE_CHECK_NAME,
                            AgentCheck.OK,
                            tags=service_check_tags)
 
@@ -133,14 +132,13 @@ class CiscoACICheck(AgentCheck):
             if mval:
                 if hostname:
                     tags_to_send += self.check_tags
-                tags_to_send += user_tags
-                tags_to_send += tags
+                tags_to_send += user_tags + tags
                 if obj_type == "gauge":
                     self.gauge(mname, float(mval), tags=tags, hostname=hostname)
                 elif obj_type == "rate":
                     self.rate(mname, float(mval), tags=tags, hostname=hostname)
                 else:
-                    log_line = "trying to submit metric: {0} with unknown type: {1}"
+                    log_line = "Trying to submit metric: {} with unknown type: {}"
                     log_line = log_line.format(mname, obj_type)
                     self.log.debug(log_line)
 

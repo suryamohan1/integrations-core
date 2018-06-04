@@ -7,6 +7,10 @@ from . import helpers
 
 
 class Fabric:
+    """
+    Collect fabric metrics from the APIC
+    """
+
     def __init__(self, check, api, instance):
         self.check = check
         self.api = api
