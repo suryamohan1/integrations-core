@@ -83,7 +83,7 @@ class Tenant:
             if 'index' in attrs:
                 continue
 
-            self.log.debug("submitting metrics for: {0}".format(name))
+            self.log.debug("submitting metrics for: {}".format(name))
             metrics = {}
 
             tenant_metrics = self.tenant_metrics.get(obj_type, {})
@@ -115,10 +115,10 @@ class Tenant:
 
         self.last_events_ts[tenant] = now
 
-        log_line = "Fetched: {0} events".format(len(event_list))
+        log_line = "Fetched: {} events".format(len(event_list))
         if len(event_list) > 0:
             created = event_list[0].get('eventRecord', {}).get('attributes', {}).get('created')
-            log_line += ", most recent is from: {0}".format(created)
+            log_line += ", most recent is from: {}".format(created)
         self.log.info(log_line)
 
         for event in event_list:
@@ -126,7 +126,7 @@ class Tenant:
             created = ev.get('created')
             create_date = re.search('\d{4}-\d{2}-\d{1,2}T\d{2}:\d{2}:\d{2}', created).group(0)
 
-            self.log.debug("ev time: {0}".format(created))
+            self.log.debug("ev time: {}".format(created))
             strptime = datetime.datetime.strptime(create_date, '%Y-%m-%dT%H:%M:%S')
             timestamp = (strptime - datetime.datetime(1970, 1, 1)).total_seconds()
             if now - timestamp > time_window:
