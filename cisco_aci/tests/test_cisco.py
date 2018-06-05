@@ -56,7 +56,7 @@ class FakeSess(SessionWrapper):
         log.info(os.listdir(FIXTURES_DIR))
 
         with open(mock_path, 'r') as f:
-            return json.loads(f.read())['imdata']
+            return json.loads(f.read())
 
 
 @pytest.fixture
