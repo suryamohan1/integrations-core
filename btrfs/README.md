@@ -2,15 +2,15 @@
 {{< img src="integrations/btrfs/btrfs_metric.png" alt="btrfs metric" responsive="true" popup="true">}}
 ## Overview
 
-Get metrics from btrfs service in real time to:
+Get metrics from Btrfs service in real time to:
 
-* Visualize and monitor btrfs states
-* Be notified about btrfs failovers and events.
+* Visualize and monitor Btrfs states
+* Be notified about Btrfs failovers and events.
 
 ## Setup
 ### Installation
 
-The Btrfs check is packaged with the Agent, so simply [install the Agent][1] on every server that uses at least one Btrfs filesystem.
+The Btrfs check is included in the [Datadog Agent][4] package, so you don't need to install anything else on your servers that use at least one Btrfs filesystem.
 
 ### Configuration
 
@@ -28,10 +28,10 @@ The Btrfs check is packaged with the Agent, so simply [install the Agent][1] on 
 See [metadata.csv][5] for a list of metrics provided by this integration.
 
 ### Events
-The Btrfs check does not include any event at this time.
+The Btrfs check does not include any events at this time.
 
 ### Service Checks
-The Btrfs check does not include any service check at this time.
+The Btrfs check does not include any service checks at this time.
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][6].

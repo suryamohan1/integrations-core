@@ -10,7 +10,7 @@ Capture RiakCS metrics in Datadog to:
 ## Setup
 ### Installation
 
-The RiakCS check is packaged with the Agent, so simply [install the Agent][1] on your RiakCS nodes.
+The RiakCS check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your RiakCS nodes.
 
 ### Configuration
 
@@ -41,7 +41,7 @@ The RiakCS check is packaged with the Agent, so simply [install the Agent][1] on
 See [metadata.csv][5] for a list of metrics provided by this check.
 
 ### Events
-The RiackCS check does not include any event at this time.
+The RiackCS check does not include any events at this time.
 
 ### Service Checks
 

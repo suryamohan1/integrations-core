@@ -13,7 +13,7 @@ The check emits events for service flaps, host state changes, passive service ch
 ## Setup
 ### Installation
 
-The Nagios check is packaged with the Agent, so simply [install the Agent][1] on your Nagios servers.
+The Nagios check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Nagios servers.
 
 ### Configuration
 
@@ -64,7 +64,7 @@ The check watches the Nagios events log for log lines containing these string, e
 - SERVICE DOWNTIME ALERT
 
 ### Service Checks
-The Nagios check does not include any service check at this time.
+The Nagios check does not include any service checks at this time.
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][5].

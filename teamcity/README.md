@@ -9,7 +9,7 @@ Unlike most Agent checks, this one doesn't collect any metrics—just events.
 ## Setup
 ### Installation
 
-The Teamcity check is packaged with the Agent, so simply [install the Agent][1] on your Teamcity servers.
+The Teamcity check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Teamcity servers.
 
 ### Configuration
 #### Prepare Teamcity
@@ -44,13 +44,13 @@ Add an item like the above to `instances` for each build configuration you want 
 
 ## Data Collected
 ### Metrics
-The Teamcity check does not include any metric at this time.
+The Teamcity check does not include any metrics at this time.
 
 ### Events
 All Teamcity events are forwared to your Datadog application.
 
 ### Service Checks
-The Teamcity check does not include any service check at this time.
+The Teamcity check does not include any service checks at this time.
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][6].

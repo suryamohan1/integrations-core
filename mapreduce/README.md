@@ -10,7 +10,7 @@ Get metrics from mapreduce service in real time to:
 ## Setup
 ### Installation
 
-The Mapreduce check is packaged with the Agent, so simply [install the Agent][1] on your servers.
+The Mapreduce check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
 ### Configuration
 
@@ -25,7 +25,7 @@ Edit the `mapreduce.d/conf.yaml` file, in the `conf.d/` folder at the root of yo
 See [metadata.csv][4] for a list of metrics provided by this integration.
 
 ### Events
-The Mapreduce check does not include any event at this time.
+The Mapreduce check does not include any events at this time.
 
 ### Service Checks
 **mapreduce.resource_manager.can_connect**

@@ -8,7 +8,7 @@ It uses the `nodetool` utility to collect them.
 ## Setup
 ### Installation
 
-The Cassandra Nodetool check is packaged with the Agent, so simply [install the Agent][2] on your Cassandra nodes.
+The Cassandra Nodetool check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Cassandra nodes.
 
 ### Configuration
 
@@ -50,7 +50,7 @@ instances:
 See [metadata.csv][5] for a list of metrics provided by this integration.
 
 ### Events
-The Cassandra_nodetool check does not include any event at this time.
+The Cassandra_nodetool check does not include any events at this time.
 
 ### Service Checks
 

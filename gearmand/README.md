@@ -11,7 +11,7 @@ Collect Gearman metrics to:
 ## Setup
 ### Installation
 
-The Gearman check is packaged with the Agent, so simply [install the Agent][1] on your Gearman job servers.
+The Gearman check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Gearman job servers.
 
 ### Configuration
 
@@ -38,7 +38,7 @@ The Gearman check is packaged with the Agent, so simply [install the Agent][1] o
 See [metadata.csv][5] for a list of metrics provided by this integration.
 
 ### Events
-The Gearmand check does not include any event at this time.
+The Gearmand check does not include any events at this time.
 
 ### Service Checks
 

@@ -12,7 +12,7 @@ And more.
 ## Setup
 ### Installation
 
-The RabbitMQ check is packaged with the Agent, so simply [install the Agent][1] on your RabbitMQ servers.
+The RabbitMQ check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your RabbitMQ servers.
 
 ### Configuration
 
@@ -24,7 +24,7 @@ Enable the RabbitMQ management plugin. See [RabbitMQ's documentation][2] to enab
 
 #### Metric Collection
 
-* Add this configuration setup to your `rabbitmq.d/conf.yaml` file to start gathering your [RabbitMQ metrics](#metrics):
+* Add this configuration block to your `rabbitmq.d/conf.yaml` file to start gathering your [RabbitMQ metrics](#metrics):
 
 ```
 init_config:
@@ -76,12 +76,12 @@ Configuration Options
     ```
     logs_enabled: true
     ```
-    
-3. Add this configuration setup to your `rabbitmq.d/conf.yaml` file to start collecting your RabbitMQ logs:
+
+3. Add this configuration block to your `rabbitmq.d/conf.yaml` file to start collecting your RabbitMQ logs:
 
   ```
   logs:
-      
+
       - type: file
         path: /var/log/rabbit/*.log
         source: rabbitmq
@@ -89,7 +89,7 @@ Configuration Options
         log_processing_rules:
           - type: multi_line
             name: logs_starts_with_equal_sign
-            pattern: =
+            pattern: "="
   ```
 
   See the [sample rabbitmq.yaml][3] for all available configuration options.

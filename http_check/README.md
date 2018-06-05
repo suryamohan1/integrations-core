@@ -5,9 +5,10 @@
 Monitor the up/down status of local or remote HTTP endpoints. The HTTP check can detect bad response codes (e.g. 404), identify soon-to-expire SSL certificates, search responses for specific text, and much more. The check also submits HTTP response times as a metric.
 
 ## Setup
+
 ### Installation
 
-The HTTP check is packaged with the Agent, so simply [install the Agent][1] on any host from which you want to probe your HTTP sites. Though many metrics-oriented checks are best run on the same host(s) as the monitored service, you may want to run this status-oriented check from hosts that do not run the monitored sites.
+The HTTP check is included in the [Datadog Agent][1] package, so you don't need to install anything else on the servers from which you will probe your HTTP sites. Though many metrics-oriented checks are best run on the same host(s) as the monitored service, you may want to run this status-oriented check from hosts that do not run the monitored sites.
 
 ### Configuration
 
@@ -46,7 +47,7 @@ See the [sample http_check.d/conf.yaml][2] for a full list and description of av
 | `http_response_status_code` | A string or Python regular expression for an HTTP status code. This check will report DOWN for any status code that does not match. This defaults to 1xx, 2xx and 3xx HTTP status codes. For example: `401` or `4\d\d`.|
 | `include_content` | When set to `true`, the check will include the first 200 characters of the HTTP response body in notifications. The default value is `false`. |
 | `collect_response_time` | By default, the check will collect the response time (in seconds) as the metric `network.http.response_time`. To disable, set this value to `false`. |
-| `disable_ssl_validation` | This setting will skip SSL certificate validation and is enabled by default. If you require SSL certificate validation, set this to `false`. |
+| `disable_ssl_validation` | This setting will skip SSL certificate validation and is enabled by default. If you require SSL certificate validation, set this to `false`. This option is only used when gathering the response time/aliveness from the specified endpoint. Note this setting doesn't apply to the `check_certificate_expiration` option. |
 | `ignore_ssl_warning` | When SSL certificate validation is enabled (see setting above), this setting will allow you to disable security warnings. |
 | `ca_certs` | This setting will allow you to override the default certificate path as specified in `init_config` |
 | `check_certificate_expiration` | When `check_certificate_expiration` is enabled, the service check will check the expiration date of the SSL certificate. Note that this will cause the SSL certificate to be validated, regardless of the value of the `disable_ssl_validation` setting. |
@@ -66,13 +67,14 @@ When you have finished configuring `http_check.d/conf.yaml`, [restart the Agent]
 [Run the Agent's `status` subcommand][6] and look for `http_check` under the Checks section.
 
 ## Data Collected
+
 ### Metrics
 
 See [metadata.csv][7] for a list of metrics provided by this integration.
 
 ### Events
 
-The HTTP check does not include any event at this time.
+The HTTP check does not include any events at this time.
 
 ### Service Checks
 

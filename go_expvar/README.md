@@ -9,7 +9,7 @@ If you prefer to instrument your Go code using only [dogstats-go][1], you can st
 ## Setup
 ### Installation
 
-The Go Expvar check is packaged with the Agent, so simply [install the Agent][2] anywhere you run Go services whose metrics you want to collect.
+The Go Expvar check is packaged with the Agent, so [install the Agent][2] anywhere you run Go services whose metrics you want to collect.
 
 ### Configuration
 #### Prepare your Go service
@@ -54,10 +54,10 @@ If your service doesn't already listen for HTTP requests (via the http package),
 See [metadata.csv][8] for a list of metrics provided by this integration.
 
 ### Events
-The Go-Expvar check does not include any event at this time.
+The Go-Expvar check does not include any events at this time.
 
 ### Service Checks
-The Go-Expvar check does not include any service check at this time.
+The Go-Expvar check does not include any service checks at this time.
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][9].

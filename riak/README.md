@@ -8,7 +8,7 @@ This check lets you track node, vnode and ring performance metrics from RiakKV o
 ## Setup
 ### Installation
 
-The Riak check is packaged with the Agent, so simply [install the Agent][1] on your Riak servers.
+The Riak check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Riak servers.
 
 ### Configuration
 
@@ -34,7 +34,7 @@ The Riak check is packaged with the Agent, so simply [install the Agent][1] on y
 See [metadata.csv][5] for a list of metrics provided by this check.
 
 ### Events
-The Riak check does not include any event at this time.
+The Riak check does not include any events at this time.
 
 ### Service Checks
 

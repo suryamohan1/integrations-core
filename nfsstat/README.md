@@ -7,7 +7,7 @@ The NFS integration collects metrics about mount points on the NFS client as it 
 ## Setup
 ### Installation
 
-The NFSstat check is packaged with the Agent, so simply [install the Agent][2] on your servers.
+The NFSstat check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your servers.
 
 ### Configuration
 
@@ -22,10 +22,10 @@ Edit the `nfsstat.d/conf.yaml` file, in the `conf.d/` folder at the root of your
 See [metadata.csv][5] for a list of metrics provided by this check.
 
 ### Events
-The Nfststat check does not include any event at this time.
+The Nfststat check does not include any events at this time.
 
 ### Service Checks
-The Nfsstat check does not include any service check at this time.
+The Nfsstat check does not include any service checks at this time.
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][6].

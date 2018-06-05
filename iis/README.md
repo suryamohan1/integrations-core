@@ -59,7 +59,7 @@ C:/> winmgmt /resyncperf
 
 #### Metric Collection
 
- * Add this configuration setup to your `iis.d/conf.yaml` file to start gathering your [IIS metrics](#metrics):
+ * Add this configuration block to your `iis.d/conf.yaml` file to start gathering your [IIS metrics](#metrics):
 
 ```
 init_config:
@@ -114,7 +114,7 @@ Here's an example of configuration that would check the current machine and a re
   logs_enabled: true
   ```
 
-* Add this configuration setup to your `iis.d/conf.yaml` file to start collecting your IIS Logs:
+* Add this configuration block to your `iis.d/conf.yaml` file to start collecting your IIS Logs:
 
   ```
   logs:
@@ -141,7 +141,7 @@ Here's an example of configuration that would check the current machine and a re
 See [metadata.csv][7] for a list of metrics provided by this integration.
 
 ### Events
-The IIS check does not include any event at this time.
+The IIS check does not include any events at this time.
 
 ### Service Checks
 

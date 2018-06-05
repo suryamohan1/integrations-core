@@ -10,7 +10,7 @@ Get metrics from kubernetes_state service in real time to:
 ## Setup
 ### Installation
 
-The Kubernetes-Sate check is packaged with the Agent, so simply [install the Agent][1] on your Kubernetes servers.
+The Kubernetes-Sate check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Kubernetes servers.
 
 ### Configuration
 
@@ -25,7 +25,7 @@ Edit the `kubernetes_state.d/conf.yaml` file, in the `conf.d/` folder at the roo
 See [metadata.csv][4] for a list of metrics provided by this integration.
 
 ### Events
-The Kubernetes-state check does not include any event at this time.
+The Kubernetes-state check does not include any events at this time.
 
 ### Service Checks
 **kubernetes_state.node.ready**

@@ -12,7 +12,7 @@ more information about Gitlab and its integration with Prometheus
 ## Setup
 ### Installation
 
-The Gitlab check is packaged with the Agent, so simply [install the Agent][101] on your Gitlab servers.
+The Gitlab check is included in the [Datadog Agent][101] package, so you don't need to install anything else on your Gitlab servers.
 
 ### Configuration
 
@@ -30,7 +30,7 @@ See the [sample gitlab.d/conf.yaml][102] for all available configuration options
 See [metadata.csv][104] for a list of metrics provided by this integration.
 
 ### Events
-The Gitlab check does not include any event at this time.
+The Gitlab check does not include any events at this time.
 
 ### Service Checks
 The Gitlab check includes a readiness and a liveness service check.

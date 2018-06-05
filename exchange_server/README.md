@@ -9,7 +9,7 @@ Get metrics from Microsoft Exchange Server
 ## Setup
 ### Installation
 
-The Exchange check is packaged with the Agent, so simply [install the Agent][1] on your servers.
+The Exchange check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
 ### Configuration
 
@@ -27,10 +27,10 @@ The Exchange check is packaged with the Agent, so simply [install the Agent][1] 
 See [metadata.csv][4] for a list of metrics provided by this integration.
 
 ### Events
-The exchange server check does not include any events at this time.
+The Exchange server check does not include any events at this time.
 
 ### Service Checks
-The exchange server check does not include any service check at this time.
+The Exchange server check does not include any service checks at this time.
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

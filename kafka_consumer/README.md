@@ -9,7 +9,7 @@ This check fetches the highwater offsets from the Kafka brokers, consumer offset
 ## Setup
 ### Installation
 
-The Agent's Kafka consumer check is packaged with the Agent, so simply [install the Agent][101] on your Kafka nodes.
+The Agent's Kafka consumer check is included in the [Datadog Agent][101] package, so you don't need to install anything else on your Kafka nodes.
 
 ### Configuration
 
@@ -31,21 +31,13 @@ The Datadog Agent emits an event when the value of the `consumer_lag` metric goe
 `partition` and `consumer_group`.
 
 ### Service Checks
-The Kafka-consumer check does not include any service check at this time.
+The Kafka-consumer check does not include any service checks at this time.
 
 ## Troubleshooting
-### Specifying a non existent partition in your kafka_Consumer.yaml file
-If you get this error in your info.log:
-```
-instance - #0 [Error]: ''
-```
 
-Specify the specific partition of your environment for your topic in your kafka_Consumer.yaml file:
-```
-#my_topic [0, 1, 4, 12]
-```
-
-## Further Reading
+* [Troubleshooting and Deep Dive for Kafka][24]
+* [Agent failed to retrieve RMIServer stub][25]
+* [Producer and Consumer metrics don't appear in my Datadog application][26]
 
 ## Further Reading
 

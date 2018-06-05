@@ -17,7 +17,7 @@ Default NTP servers reached:
 ## Setup
 ### Installation
 
-The NTP check is packaged with the Agent, so simply [install the Agent][1] on your servers.
+The NTP check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
 ### Configuration
 
@@ -52,7 +52,7 @@ Configuration Options:
 See [metadata.csv][5] for a list of metrics provided by this check.
 
 ### Events
-The NTP check does not include any event at this time.
+The NTP check does not include any events at this time.
 
 ### Service Checks
 

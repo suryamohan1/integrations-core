@@ -9,7 +9,7 @@ This check does **NOT** forward application metrics from StatsD servers to Datad
 ## Setup
 ### Installation
 
-The StatsD check is packaged with the Agent, so simply [install the Agent][1] on any servers that run StatsD.
+The StatsD check is included in the [Datadog Agent][1] package, so you don't need to install anything else on any servers that run StatsD.
 
 ### Configuration
 
@@ -41,7 +41,7 @@ The StatsD check is packaged with the Agent, so simply [install the Agent][1] on
 See [metadata.csv][5] for a list of metrics provided by this integration.
 
 ### Events
-The StatsD check does not include any event at this time.
+The StatsD check does not include any events at this time.
 
 ### Service Checks
 

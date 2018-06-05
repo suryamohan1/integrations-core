@@ -11,7 +11,7 @@ Collect etcd metrics to:
 ## Setup
 ### Installation
 
-The etcd check is packaged with the Agent, so simply [install the Agent][1] on your etcd instance(s).
+The etcd check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your etcd instance(s).
 
 ### Configuration
 
@@ -39,7 +39,7 @@ See [metadata.csv][5] for a list of metrics provided by this integration.
 etcd metrics are tagged with `etcd_state:leader` or `etcd_state:follower`, depending on the node status, so you can easily aggregate metrics by status.
 
 ### Events
-The Etcd check does not include any event at this time.
+The Etcd check does not include any events at this time.
 
 ### Service Checks
 

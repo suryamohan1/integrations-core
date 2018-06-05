@@ -2,13 +2,10 @@
 # All rights reserved
 # Licensed under Simplified BSD License (see LICENSE)
 
-# stdlib
-
-# 3rd party
 import requests
 
 # project
-from checks import AgentCheck
+from datadog_checks.checks import AgentCheck
 
 EVENT_TYPE = SOURCE_TYPE_NAME = 'squid'
 
@@ -69,6 +66,7 @@ SQUID_COUNTERS = [
     "aborted_requests",
 ]
 
+
 class SquidCheck(AgentCheck):
 
     def check(self, instance):
@@ -96,7 +94,7 @@ class SquidCheck(AgentCheck):
             raise
 
         # Each line is a counter in the form 'counter_name = value'
-        raw_counters = res.text.split("\n")
+        raw_counters = res.text.strip().split("\n")
         counters = {}
         for line in raw_counters:
             counter, value = self.parse_counter(line)

@@ -10,7 +10,7 @@ Get metrics from Fluentd to:
 ## Setup
 ### Installation
 
-The Fluentd check is packaged with the Agent, so simply [install the Agent][1] on your Fluentd servers.
+The Fluentd check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Fluentd servers.
 
 ### Configuration
 
@@ -31,7 +31,7 @@ In your fluentd configuration file, add a `monitor_agent` source:
 
 #### Metric Collection
 
-1. Add this configuration setup to your `fluentd.d/conf.yaml` file to start gathering your [Fluentd metrics](#metrics):
+1. Add this configuration block to your `fluentd.d/conf.yaml` file to start gathering your [Fluentd metrics](#metrics):
 
     ```yaml
       init_config:
@@ -62,7 +62,7 @@ Follow [those instructions][4] to forward logs to Datadog with Fluentd.
 See [metadata.csv][6] for a list of metrics provided by this integration.
 
 ### Events
-The FluentD check does not include any event at this time.
+The FluentD check does not include any events at this time.
 
 ### Service Checks
 

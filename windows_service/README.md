@@ -7,7 +7,7 @@ This check monitors the state of any Windows Service and submits a service check
 
 ### Installation
 
-The Windows Service check is packaged with the Agent, so simply [install the Agent][1] on your Windows hosts.
+The Windows Service check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Windows hosts.
 
 ### Configuration
 
@@ -41,7 +41,7 @@ Note: spaces are replaced by underscores in Datadog.
 The Windows Service check does not include any metrics at this time.
 
 ### Events
-The Windows Service check does not include any event at this time.
+The Windows Service check does not include any events at this time.
 
 ### Service Checks
 **windows_service.state**:

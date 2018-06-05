@@ -7,7 +7,7 @@ Track overall and per-pool stats on each of your twemproxy servers. This Agent c
 ## Setup
 ### Installation
 
-The Agent's twemproxy check is packaged with the Agent, so simply [install the Agent][1] on each of your Twemproxy servers.
+The Agent's Twemproxy check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Twemproxy servers.
 
 ### Configuration
 
@@ -33,7 +33,7 @@ The Agent's twemproxy check is packaged with the Agent, so simply [install the A
 See [metadata.csv][5] for a list of metrics provided by this check.
 
 ### Events
-The Twemproxy check does not include any event at this time.
+The Twemproxy check does not include any events at this time.
 
 ### Service Checks
 

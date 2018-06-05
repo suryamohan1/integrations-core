@@ -10,6 +10,7 @@ from contextlib import closing, contextmanager
 from collections import defaultdict
 
 # 3p
+from six import iteritems
 import pymysql
 try:
     import psutil
@@ -25,6 +26,7 @@ GAUGE = "gauge"
 RATE = "rate"
 COUNT = "count"
 MONOTONIC = "monotonic_count"
+PROC_NAME = 'mysqld'
 
 # Vars found in "SHOW STATUS;"
 STATUS_VARS = {
@@ -789,10 +791,10 @@ class MySql(AgentCheck):
                 self.warning("Error while reading mysql (pid: %s) procfs data\n%s"
                              % (pid, traceback.format_exc()))
 
-    def _get_server_pid(self, db):
-        pid = None
-
-        # Try to get pid from pid file, it can fail for permission reason
+    def _get_pid_file_variable(self, db):
+        """
+        Get the `pid_file` variable
+        """
         pid_file = None
         try:
             with closing(db.cursor()) as cursor:
@@ -801,6 +803,13 @@ class MySql(AgentCheck):
         except Exception:
             self.warning("Error while fetching pid_file variable of MySQL.")
 
+        return pid_file
+
+    def _get_server_pid(self, db):
+        pid = None
+
+        # Try to get pid from pid file, it can fail for permission reason
+        pid_file = self._get_pid_file_variable(db)
         if pid_file is not None:
             self.log.debug("pid file: %s" % str(pid_file))
             try:
@@ -812,12 +821,14 @@ class MySql(AgentCheck):
 
         # If pid has not been found, read it from ps
         if pid is None and PSUTIL_AVAILABLE:
-            try:
-                for proc in psutil.process_iter():
-                    if proc.name() == "mysqld":
+            for proc in psutil.process_iter():
+                try:
+                    if proc.name() == PROC_NAME:
                         pid = proc.pid
-            except Exception:
-                self.log.exception("Error while fetching mysql pid from psutil")
+                except (psutil.AccessDenied, psutil.ZombieProcess, psutil.NoSuchProcess):
+                    continue
+                except Exception:
+                    self.log.exception("Error while fetching mysql pid from psutil")
 
         return pid
 
@@ -868,7 +879,7 @@ class MySql(AgentCheck):
             return False
 
     def _get_replica_stats(self, db, is_mariadb, replication_channel):
-        replica_results = {}
+        replica_results = defaultdict(dict)
         try:
             with closing(db.cursor(pymysql.cursors.DictCursor)) as cursor:
                 if is_mariadb and replication_channel:
@@ -879,24 +890,13 @@ class MySql(AgentCheck):
                 else:
                     cursor.execute("SHOW SLAVE STATUS;")
 
-                if replication_channel:
-                    slave_results = cursor.fetchone()
-                else:
-                    slave_results = cursor.fetchall()
-
-                if slave_results:
-                    if replication_channel:
-                        replica_results.update(slave_results)
-                    elif len(slave_results) > 0:
-                        for slave_result in slave_results:
-                            # MySQL <5.7 does not have Channel_Name.
-                            # For MySQL >=5.7 'Channel_Name' is set to an empty string by default
-                            channel = slave_result.get('Channel_Name') or 'default'
-                            for key in slave_result:
-                                if slave_result[key] is not None:
-                                    if key not in replica_results:
-                                        replica_results[key] = {}
-                                    replica_results[key]["channel:{0}".format(channel)] = slave_result[key]
+                for slave_result in cursor.fetchall():
+                    # MySQL <5.7 does not have Channel_Name.
+                    # For MySQL >=5.7 'Channel_Name' is set to an empty string by default
+                    channel = replication_channel or slave_result.get('Channel_Name') or 'default'
+                    for key, value in iteritems(slave_result):
+                        if value is not None:
+                            replica_results[key]['channel:{0}'.format(channel)] = value
         except (pymysql.err.InternalError, pymysql.err.OperationalError) as e:
             errno, msg = e.args
             if errno == 1617 and msg == "There is no master connection '{0}'".format(replication_channel):

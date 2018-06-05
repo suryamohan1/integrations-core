@@ -8,9 +8,6 @@ import os
 # the root of the repo
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Github API url
-GITHUB_API_URL = 'https://api.github.com'
-
 # The requirements file used by the agent
 AGENT_REQ_FILE = 'requirements-agent-release.txt'
 
@@ -32,6 +29,9 @@ AGENT_BASED_INTEGRATIONS = [
     'envoy',
     'exchange_server',
     'haproxy',
+    'hdfs_datanode',
+    'hdfs_namenode',
+    'http_check',
     'iis',
     'istio',
     'kafka_consumer',
@@ -46,6 +46,8 @@ AGENT_BASED_INTEGRATIONS = [
     'network',
     'nfsstat',
     'nginx',
+    'openstack',
+    'oracle',
     'pdh_check',
     'pgbouncer',
     'postgres',
@@ -55,6 +57,7 @@ AGENT_BASED_INTEGRATIONS = [
     'riak',
     'spark',
     'ssh_check',
+    'squid',
     'system_core',
     'teamcity',
     'varnish',

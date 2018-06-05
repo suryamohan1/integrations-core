@@ -7,7 +7,7 @@ The Solr check tracks the state and performance of a Solr cluster. It collects m
 ## Setup
 ### Installation
 
-The Solr check is packaged with the Agent, so simply [install the Agent][1] on your Solr nodes.  
+The Solr check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Solr nodes.  
 
 This check is JMX-based, so you'll need to enable JMX Remote on your Tomcat servers. Read the [JMX Check documentation][2] for more information on that.
 
@@ -212,7 +212,7 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
 See [metadata.csv][6] for a list of metrics provided by this check.
 
 ### Events
-The Solr check does not include any event at this time.
+The Solr check does not include any events at this time.
 
 ### Service Checks
 **solr.can_connect**

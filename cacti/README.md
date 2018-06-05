@@ -10,7 +10,7 @@ Get metrics from cacti service in real time to:
 ## Setup
 ### Installation
 
-The Cacti check is packaged with the Agent, so simply [install the Agent][1] on your Cacti servers.
+The Cacti check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Cacti servers.
 
 ### Configuration
 
@@ -70,10 +70,10 @@ fi'
 See [metadata.csv][4] for a list of metrics provided by this integration.
 
 ### Events
-The Cacti check does not include any event at this time.
+The Cacti check does not include any events at this time.
 
 ### Service Checks
-The Cacti check does not include any service check at this time.
+The Cacti check does not include any service checks at this time.
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][5].

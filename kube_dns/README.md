@@ -13,7 +13,7 @@ more informations about kube-dns
 ## Setup
 ### Installation
 
-The Kube-dns check is packaged with the Agent, so simply [install the Agent][1] on your servers.
+The Kube-dns check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
 ### Configuration
 
@@ -53,10 +53,10 @@ metadata:
 See [metadata.csv][4] for a list of metrics provided by this integration.
 
 ### Events
-The Kube-DNS check does not include any event at this time.
+The Kube-DNS check does not include any events at this time.
 
 ### Service Checks
-The Kube-DNS check does not include any service check at this time.
+The Kube-DNS check does not include any service checks at this time.
 
 ## Troubleshooting  
 Need help? Contact [Datadog Support][5].    

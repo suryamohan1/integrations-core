@@ -10,7 +10,7 @@ Get metrics from ASP.NET service in real time to:
 ## Setup
 ### Installation
 
-The ASP.NET check is packaged with the Agent, so simply [install the Agent][1] on your servers.
+The ASP.NET check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
 ### Configuration
 
@@ -32,7 +32,7 @@ The ASP.NET check does not include any metrics at this time.
 All ASP.NET events and failovers are sent to your [Datadog event stream][4]
 
 ### Service Checks
-The ASP.NET check does not include any service check at this time.
+The ASP.NET check does not include any service checks at this time.
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][5].

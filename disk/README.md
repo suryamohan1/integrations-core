@@ -7,7 +7,7 @@ Collect metrics related to disk usage and IO.
 ## Setup
 ### Installation
 
-The disk check is packaged with the Agent, so simply [install the Agent][1] anywhere you wish to use it.
+The disk check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your server.
 
 ### Configuration
 
@@ -24,10 +24,10 @@ If you want to configure the check with custom options, Edit the `disk.d/conf.ya
 See [metadata.csv][4] for a list of metrics provided by this integration.
 
 ### Events
-The Disk check does not include any event at this time.
+The Disk check does not include any events at this time.
 
 ### Service Checks
-The Disk check does not include any service check at this time.
+The Disk check does not include any service checks at this time.
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][5].

@@ -7,7 +7,7 @@ The Agent's memcache check lets you track memcache's memory use, hits, misses, e
 ## Setup
 ### Installation
 
-The memcache check is packaged with the Agent, so simply [install the Agent][1] on your memcache servers.
+The memcache check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your memcache servers.
 
 ### Configuration
 
@@ -43,7 +43,7 @@ The check only collects `memcache.slabs.*` metrics if you set `options.slabs: tr
 
 
 ### Events
-The Mcache check does not include any event at this time.
+The Mcache check does not include any events at this time.
 
 ### Service Checks
 

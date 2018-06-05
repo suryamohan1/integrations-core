@@ -11,7 +11,7 @@ Enable the Datadog-Ceph integration to:
 ## Setup
 ### Installation
 
-The Ceph check is packaged with the Agent, so simply [install the Agent][1] on your Ceph servers.
+The Ceph check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Ceph servers.
 
 ### Configuration
  
@@ -44,7 +44,7 @@ See [metadata.csv][4] for a list of metrics provided by this integration.
 Note: If you are running ceph luminous or later, you will not see the metric `ceph.osd.pct_used`.
 
 ### Events
-The Ceph check does not include any event at this time.
+The Ceph check does not include any events at this time.
 
 ### Service Checks
 

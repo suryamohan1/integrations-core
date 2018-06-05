@@ -10,7 +10,7 @@ The process check lets you:
 ## Setup
 ### Installation
 
-The process check is packaged with the Agent, so simply [install the Agent][2] anywhere you want to use the check.
+The process check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your server.
 
 ### Configuration
 
@@ -66,7 +66,7 @@ See [metadata.csv][9] for a list of metrics provided by this check.
 All metrics are per `instance` configured in process.yaml, and are tagged `process_name:<instance_name>`.
 
 ### Events
-The Process check does not include any event at this time.
+The Process check does not include any events at this time.
 
 ### Service Checks
 **process.up**:

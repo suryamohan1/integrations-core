@@ -11,7 +11,7 @@ Capture metrics from directories and files of your choosing. The Agent will coll
 ## Setup
 ### Installation
 
-The directory check is packaged with the Agent, so simply [install the Agent][1] anywhere you wish to use it.
+The directory check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your server.
 
 ### Configuration
 
@@ -44,10 +44,10 @@ The directory check is packaged with the Agent, so simply [install the Agent][1]
 See [metadata.csv][5] for a list of metrics provided by this integration.
 
 ### Events
-The Directory check does not include any event at this time.
+The Directory check does not include any events at this time.
 
 ### Service Checks
-The Directory check does not include any service check at this time.
+The Directory check does not include any service checks at this time.
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][6].
