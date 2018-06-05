@@ -6,10 +6,7 @@ import datetime
 
 from datadog_checks.checks import AgentCheck
 
-try:
-    from datadog_checks.utils.containers import hash_mutable
-except ImportError:
-    from utils.containers import hash_mutable
+from datadog_checks.utils.containers import hash_mutable
 
 from datadog_checks.config import _is_affirmative
 

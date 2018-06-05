@@ -4,10 +4,7 @@
 
 import re
 
-try:
-    from datadog_checks.utils.containers import hash_mutable
-except ImportError:
-    from utils.containers import hash_mutable
+from datadog_checks.utils.containers import hash_mutable
 
 from . import helpers
 

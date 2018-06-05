@@ -18,41 +18,41 @@ FABRIC_METRICS = {
         "healthMin": FABRIC_PREFIX + ".pod.health.min"
     },
     "fvFltCounter": {
-        "critcountLast": FABRIC_PREFIX + ".{0}.fault_counter.crit",
-        "warncountLast": FABRIC_PREFIX + ".{0}.fault_counter.warn"
+        "critcountLast": FABRIC_PREFIX + ".{}.fault_counter.crit",
+        "warncountLast": FABRIC_PREFIX + ".{}.fault_counter.warn"
     },
     "eqptEgrTotal": {
-        "pktsLast": FABRIC_PREFIX + ".{0}.egr_total.pkts",
-        "pktsRate": FABRIC_PREFIX + ".{0}.egr_total.pkts.rate",
-        "bytesCum": FABRIC_PREFIX + ".{0}.egr_total.bytes.cum",
-        "bytesRate": FABRIC_PREFIX + ".{0}.egr_total.bytes.rate",
+        "pktsLast": FABRIC_PREFIX + ".{}.egr_total.pkts",
+        "pktsRate": FABRIC_PREFIX + ".{}.egr_total.pkts.rate",
+        "bytesCum": FABRIC_PREFIX + ".{}.egr_total.bytes.cum",
+        "bytesRate": FABRIC_PREFIX + ".{}.egr_total.bytes.rate",
     },
     "eqptIngrTotal": {
-        "pktsLast": FABRIC_PREFIX + ".{0}.ingr_total.pkts",
-        "pktsRate": FABRIC_PREFIX + ".{0}.ingr_total.pkts.rate",
-        "bytesCum": FABRIC_PREFIX + ".{0}.ingr_total.bytes.cum",
-        "bytesRate": FABRIC_PREFIX + ".{0}.ingr_total.bytes.rate",
+        "pktsLast": FABRIC_PREFIX + ".{}.ingr_total.pkts",
+        "pktsRate": FABRIC_PREFIX + ".{}.ingr_total.pkts.rate",
+        "bytesCum": FABRIC_PREFIX + ".{}.ingr_total.bytes.cum",
+        "bytesRate": FABRIC_PREFIX + ".{}.ingr_total.bytes.rate",
     },
     "eqptEgrDropPkts": {
-        "bufferCum": FABRIC_PREFIX + ".{0}.egr_drop_pkts.buffer.cum",
-        "bufferLast": FABRIC_PREFIX + ".{0}.egr_drop_pkts.buffer",
-        "errorBase": FABRIC_PREFIX + ".{0}.egr_drop_pkts.errors"
+        "bufferCum": FABRIC_PREFIX + ".{}.egr_drop_pkts.buffer.cum",
+        "bufferLast": FABRIC_PREFIX + ".{}.egr_drop_pkts.buffer",
+        "errorBase": FABRIC_PREFIX + ".{}.egr_drop_pkts.errors"
     },
     "eqptEgrBytes": {
-        "multicastLast": FABRIC_PREFIX + ".{0}.egr_bytes.multicast",
-        "multicastCum": FABRIC_PREFIX + ".{0}.egr_bytes.multicast.cum",
-        "unicastLast": FABRIC_PREFIX + ".{0}.egr_bytes.unicast",
-        "unicastCum": FABRIC_PREFIX + ".{0}.egr_bytes.unicast.cum",
-        "floodLast": FABRIC_PREFIX + ".{0}.egr_bytes.flood",
-        "floodCum": FABRIC_PREFIX + ".{0}.egr_bytes.flood.cum",
+        "multicastLast": FABRIC_PREFIX + ".{}.egr_bytes.multicast",
+        "multicastCum": FABRIC_PREFIX + ".{}.egr_bytes.multicast.cum",
+        "unicastLast": FABRIC_PREFIX + ".{}.egr_bytes.unicast",
+        "unicastCum": FABRIC_PREFIX + ".{}.egr_bytes.unicast.cum",
+        "floodLast": FABRIC_PREFIX + ".{}.egr_bytes.flood",
+        "floodCum": FABRIC_PREFIX + ".{}.egr_bytes.flood.cum",
     },
     "eqptIngrBytes": {
-        "multicastLast": FABRIC_PREFIX + ".{0}.ingr_bytes.multicast",
-        "multicastCum": FABRIC_PREFIX + ".{0}.ingr_bytes.multicast.cum",
-        "unicastLast": FABRIC_PREFIX + ".{0}.ingr_bytes.unicast",
-        "unicastCum": FABRIC_PREFIX + ".{0}.ingr_bytes.unicast.cum",
-        "floodLast": FABRIC_PREFIX + ".{0}.ingr_bytes.flood",
-        "floodCum": FABRIC_PREFIX + ".{0}.ingr_bytes.flood.cum",
+        "multicastLast": FABRIC_PREFIX + ".{}.ingr_bytes.multicast",
+        "multicastCum": FABRIC_PREFIX + ".{}.ingr_bytes.multicast.cum",
+        "unicastLast": FABRIC_PREFIX + ".{}.ingr_bytes.unicast",
+        "unicastCum": FABRIC_PREFIX + ".{}.ingr_bytes.unicast.cum",
+        "floodLast": FABRIC_PREFIX + ".{}.ingr_bytes.flood",
+        "floodCum": FABRIC_PREFIX + ".{}.ingr_bytes.flood.cum",
     },
 }
 
@@ -64,46 +64,46 @@ ENDPOINT_GROUP_PREFIX = APPLICATION_PREFIX + ".endpoint"
 def make_tenant_metrics():
     metrics = {
         "fvOverallHealth": {
-             "healthAvg": "{0}.overall_health",
-             "healthLast": "{0}.health"
+             "healthAvg": "{}.overall_health",
+             "healthLast": "{}.health"
         },
         "fvFltCounter": {
-            "warncountAvg": "{0}.fault_counter"
+            "warncountAvg": "{}.fault_counter"
         }
     }
 
     endpoint_metrics = {
         "l2IngrPktsAg": {
-            "floodCum": "{0}.ingress_pkts.flood.cum",
-            "dropCum": "{0}.ingress_pkts.drop.cum",
-            "unicastCum": "{0}.ingress_pkts.unicast.cum",
-            "unicastRate": "{0}.ingress_pkts.unicast.rate",
-            "multicastCum": "{0}.ingress_pkts.multicast.cum",
-            "multicastRate": "{0}.ingress_pkts.multicast.rate"
+            "floodCum": "{}.ingress_pkts.flood.cum",
+            "dropCum": "{}.ingress_pkts.drop.cum",
+            "unicastCum": "{}.ingress_pkts.unicast.cum",
+            "unicastRate": "{}.ingress_pkts.unicast.rate",
+            "multicastCum": "{}.ingress_pkts.multicast.cum",
+            "multicastRate": "{}.ingress_pkts.multicast.rate"
         },
         "l2EgrPktsAg": {
-            "floodCum": "{0}.egress_pkts.flood.cum",
-            "dropCum": "{0}.egress_pkts.drop.cum",
-            "unicastCum": "{0}.egress_pkts.unicast.cum",
-            "unicastRate": "{0}.egress_pkts.unicast.rate",
-            "multicastCum": "{0}.egress_pkts.multicast.cum",
-            "multicastRate": "{0}.egress_pkts.multicast.rate"
+            "floodCum": "{}.egress_pkts.flood.cum",
+            "dropCum": "{}.egress_pkts.drop.cum",
+            "unicastCum": "{}.egress_pkts.unicast.cum",
+            "unicastRate": "{}.egress_pkts.unicast.rate",
+            "multicastCum": "{}.egress_pkts.multicast.cum",
+            "multicastRate": "{}.egress_pkts.multicast.rate"
         },
         "l2IngrBytesAg": {
-            "floodCum": "{0}.ingress_bytes.flood.cum",
-            "dropCum": "{0}.ingress_bytes.drop.cum",
-            "unicastCum": "{0}.ingress_bytes.unicast.cum",
-            "unicastRate": "{0}.ingress_bytes.unicast.rate",
-            "multicastCum": "{0}.ingress_bytes.multicast.cum",
-            "multicastRate": "{0}.ingress_bytes.multicast.rate"
+            "floodCum": "{}.ingress_bytes.flood.cum",
+            "dropCum": "{}.ingress_bytes.drop.cum",
+            "unicastCum": "{}.ingress_bytes.unicast.cum",
+            "unicastRate": "{}.ingress_bytes.unicast.rate",
+            "multicastCum": "{}.ingress_bytes.multicast.cum",
+            "multicastRate": "{}.ingress_bytes.multicast.rate"
         },
         "l2EgrBytesAg": {
-            "floodCum": "{0}.egress_bytes.flood.cum",
-            "dropCum": "{0}.egress_bytes.drop.cum",
-            "unicastCum": "{0}.egress_bytes.unicast.cum",
-            "unicastRate": "{0}.egress_bytes.unicast.rate",
-            "multicastCum": "{0}.egress_bytes.multicast.cum",
-            "multicastRate": "{0}.egress_bytes.multicast.rate"
+            "floodCum": "{}.egress_bytes.flood.cum",
+            "dropCum": "{}.egress_bytes.drop.cum",
+            "unicastCum": "{}.egress_bytes.unicast.cum",
+            "unicastRate": "{}.egress_bytes.unicast.rate",
+            "multicastCum": "{}.egress_bytes.multicast.cum",
+            "multicastRate": "{}.egress_bytes.multicast.rate"
         },
     }
 

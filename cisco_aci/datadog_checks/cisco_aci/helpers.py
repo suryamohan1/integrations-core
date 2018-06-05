@@ -9,10 +9,10 @@ def parse_capacity_tags(dn):
     tags = []
     pod = get_pod_from_dn(dn)
     if pod:
-        tags.append("fabric_pod_id:{0}".format(pod))
+        tags.append("fabric_pod_id:{}".format(pod))
     node = get_node_from_dn(dn)
     if node:
-        tags.append("node_id:{0}".format(node))
+        tags.append("node_id:{}".format(node))
 
     return tags
 
@@ -104,7 +104,7 @@ def get_hostname_from_dn(dn):
 
 def get_hostname(pod, node):
     if pod and node:
-        return "pod-{0}-node-{1}".format(pod, node)
+        return "pod-{}-node-{}".format(pod, node)
     else:
         return None
 

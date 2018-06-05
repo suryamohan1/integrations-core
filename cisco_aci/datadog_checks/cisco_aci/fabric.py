@@ -28,7 +28,7 @@ class Fabric:
     def collect(self):
         fabric_pods = self.api.get_fabric_pods()
         fabric_nodes = self.api.get_fabric_nodes()
-        self.log.info("{0} pods and {1} nodes computed".format(len(fabric_nodes), len(fabric_pods)))
+        self.log.info("{} pods and {} nodes computed".format(len(fabric_nodes), len(fabric_pods)))
         pods = self.submit_pod_health(fabric_pods)
         self.submit_nodes_health(fabric_nodes, pods)
 
@@ -39,11 +39,11 @@ class Fabric:
             pod_attrs = pod.get('attributes', {})
             pod_id = pod_attrs.get('id')
             pods_dict[pod_id] = pod_attrs
-            self.log.info("processing pod {0}".format(pod_attrs['id']))
+            self.log.info("processing pod {}".format(pod_attrs['id']))
             tags = self.tagger.get_fabric_tags(p, 'fabricPod')
             stats = self.api.get_pod_stats(pod_id)
             self.submit_fabric_metric(stats, tags, 'fabricPod')
-            self.log.info("finished processing pod {0}".format(pod_attrs['id']))
+            self.log.info("finished processing pod {}".format(pod_attrs['id']))
 
         return pods_dict
 
@@ -62,16 +62,16 @@ class Fabric:
             pod_id = helpers.get_pod_from_dn(node_attrs['dn'])
 
 
-            self.log.info("processing node {0} on pod {1}".format(node_id, pod_id))
+            self.log.info("processing node {} on pod {}".format(node_id, pod_id))
             self.submit_process_metric(n, tags + self.check_tags + user_tags, hostname=hostname)
             if node_attrs['role'] != "controller":
                 stats = self.api.get_node_stats(pod_id, node_id)
                 self.submit_fabric_metric(stats, tags, 'fabricNode', hostname=hostname)
                 self.process_eth(node_attrs)
-            self.log.info("finished processing node {0}".format(node_id))
+            self.log.info("finished processing node {}".format(node_id))
 
     def process_eth(self, node):
-        self.log.info("processing ethernet ports for {0}".format(node['id']))
+        self.log.info("processing ethernet ports for {}".format(node['id']))
         hostname = helpers.get_fabric_hostname(node)
         pod_id = helpers.get_pod_from_dn(node['dn'])
         eth_list = self.api.get_eth_list(pod_id, node['id'])
@@ -81,7 +81,7 @@ class Fabric:
             tags = self.tagger.get_fabric_tags(e, 'l1PhysIf')
             stats = self.api.get_eth_stats(pod_id, node['id'], eth_id)
             self.submit_fabric_metric(stats, tags, 'l1PhysIf', hostname=hostname)
-        self.log.info("finished processing ethernet ports for {0}".format(node['id']))
+        self.log.info("finished processing ethernet ports for {}".format(node['id']))
 
     def submit_fabric_metric(self, stats, tags, obj_type, hostname=None):
         for s in stats:
