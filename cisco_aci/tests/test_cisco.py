@@ -34,7 +34,8 @@ CONFIG = {
 
 class FakeSess(SessionWrapper):
     def make_request(self, path, raw_response=False):
-        mock_path = path.replace('/', '_')
+        mock_path = path[1:]
+        mock_path = mock_path.replace('/', '_')
         mock_path = mock_path.replace('?', '_')
         mock_path = mock_path.replace('&', '_')
         mock_path = mock_path.replace('=', '_')
@@ -51,7 +52,7 @@ class FakeSess(SessionWrapper):
         mock_path += '.txt'
 
         with open(mock_path, 'r') as f:
-            return json.loads(f.read())
+            return json.loads(f.read())['imdata']
 
 
 @pytest.fixture
