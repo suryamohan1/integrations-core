@@ -31,7 +31,11 @@ class Tenant:
         self.tenant_metrics = self.check.tenant_metrics
 
     def collect(self):
-        tenants = self.instance['tenant']
+        tenants = self.instance.get('tenant', [])
+        if len(tenants) == 0:
+            self.log.warning('No tenants were listed in the config, skipping tenant collection')
+            return
+
         self.log.info("collecting from %s tenants" % len(tenants))
         # check if tenant exist before proceeding.
         for t in tenants:
