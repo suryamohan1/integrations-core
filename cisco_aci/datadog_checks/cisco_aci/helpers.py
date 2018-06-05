@@ -6,6 +6,10 @@ import re
 
 
 def parse_capacity_tags(dn):
+    """
+    This parses tags from a dn designator. They look like this:
+    topology/pod-1/node-101/sys/phys-[eth1/6]/CDeqptMacsectxpkts5min
+    """
     tags = []
     pod = get_pod_from_dn(dn)
     if pod:
@@ -18,6 +22,10 @@ def parse_capacity_tags(dn):
 
 
 def get_pod_from_dn(dn):
+    """
+    This parses the pod from a dn designator. They look like this:
+    topology/pod-1/node-101/sys/phys-[eth1/6]/CDeqptMacsectxpkts5min
+    """
     pod = re.search('pod-([0-9]+)', dn)
     if pod:
         return pod.group(1)
@@ -26,6 +34,10 @@ def get_pod_from_dn(dn):
 
 
 def get_bd_from_dn(dn):
+    """
+    This parses the bd from the dn designator. They look like this:
+    topology/pod-1/node-101/sys/phys-[eth1/6]/CDeqptMacsectxpkts5min
+    """
     bd = re.search('/BD-([^/]+)/', dn)
     if bd:
         return bd.group(1)
@@ -34,6 +46,10 @@ def get_bd_from_dn(dn):
 
 
 def get_app_from_dn(dn):
+    """
+    This parses the app from the dn designator. They look like this:
+    uni/tn-DataDog/ap-DtDg-AP1-EcommerceApp/epg-DtDg-Ecomm/HDl2IngrPktsAg1h
+    """
     app = re.search('/ap-([^/]+)/', dn)
     if app:
         return app.group(1)
@@ -42,6 +58,10 @@ def get_app_from_dn(dn):
 
 
 def get_cep_from_dn(dn):
+    """
+    This parses the cep from the dn designator. They look like this:
+    uni/tn-DataDog/ap-DtDg-AP1-EcommerceApp/epg-DtDg-Ecomm/HDl2IngrPktsAg1h
+    """
     cep = re.search('/cep-([^/]+)/', dn)
     if cep:
         return cep.group(1)
@@ -50,6 +70,10 @@ def get_cep_from_dn(dn):
 
 
 def get_epg_from_dn(dn):
+    """
+    This parses the epg from the dn designator. They look like this:
+    uni/tn-DataDog/ap-DtDg-AP1-EcommerceApp/epg-DtDg-Ecomm/HDl2IngrPktsAg1h
+    """
     epg = re.search('/epg-([^/]+)/', dn)
     if epg:
         return epg.group(1)
@@ -58,6 +82,10 @@ def get_epg_from_dn(dn):
 
 
 def get_ip_from_dn(dn):
+    """
+    This parses the ip from the dn designator. They look like this:
+    uni/tn-DataDog/ap-DtDg-AP1-EcommerceApp/epg-DtDg-Ecomm/HDl2IngrPktsAg1h
+    """
     ip = re.search('/ip-([^/]+)/', dn)
     if ip:
         return ip.group(1)
@@ -66,6 +94,10 @@ def get_ip_from_dn(dn):
 
 
 def get_event_tags_from_dn(dn):
+    """
+    This grabs the event tags from the dn designator. They look like this:
+    uni/tn-DataDog/ap-DtDg-AP1-EcommerceApp/epg-DtDg-Ecomm/HDl2IngrPktsAg1h
+    """
     tags = []
     node = get_node_from_dn(dn)
     if node:
@@ -89,6 +121,10 @@ def get_event_tags_from_dn(dn):
 
 
 def get_node_from_dn(dn):
+    """
+    This parses the node from a dn designator. They look like this:
+    topology/pod-1/node-101/sys/phys-[eth1/6]/CDeqptMacsectxpkts5min
+    """
     node = re.search('node-([0-9]+)', dn)
     if node:
         return node.group(1)
@@ -97,12 +133,19 @@ def get_node_from_dn(dn):
 
 
 def get_hostname_from_dn(dn):
+    """
+    This parses the hostname from a dn designator. They look like this:
+    topology/pod-1/node-101/sys/phys-[eth1/6]/CDeqptMacsectxpkts5min
+    """
     pod = get_pod_from_dn(dn)
     node = get_node_from_dn(dn)
     return get_hostname(pod, node)
 
 
 def get_hostname(pod, node):
+    """
+    This puts together the hostname in a way that is consistent
+    """
     if pod and node:
         return "pod-{}-node-{}".format(pod, node)
     else:
@@ -110,6 +153,14 @@ def get_hostname(pod, node):
 
 
 def get_fabric_hostname(obj):
+    """
+    This grabs the hostname from the object
+    The object looks something like this:
+    {
+    "dn": "topology/pod-1/node-101/sys/phys-[eth1/6]/CDeqptMacsectxpkts5min"
+    ...
+    }
+    """
     attrs = get_attributes(obj)
     dn = attrs['dn']
 
@@ -149,6 +200,10 @@ def get_attributes(obj):
 
 
 def check_metric_can_be_zero(metric_name, metric_value, json_attributes):
+    """
+    When a counter is reset, don't send a zero because it will look bad on the graphs
+    This checks if the zero makes sense or not
+    """
     if "last" in metric_name or "Last" in metric_name:
         return True
     if not metric_value:
