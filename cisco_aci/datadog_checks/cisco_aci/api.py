@@ -5,6 +5,7 @@
 import random
 from requests import Request, Session
 
+
 class SessionWrapper:
     def __init__(self, aci_url, session, apic_cookie, verify=None, timeout=None, log=None):
         self.session = session
@@ -73,9 +74,9 @@ class Api:
             response.raise_for_status()
             self.apic_cookie = 'APIC-Cookie={}'.format(response.cookies.get('APIC-cookie'))
             session_wrapper = SessionWrapper(aci_url, session, self.apic_cookie,
-                        verify=self.verify,
-                        timeout=self.timeout,
-                        log=self.log)
+                                             verify=self.verify,
+                                             timeout=self.timeout,
+                                             log=self.log)
             self.sessions.append(session_wrapper)
 
     def make_request(self, path, raw_response=False):

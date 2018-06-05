@@ -42,7 +42,7 @@ class CiscoACICheck(AgentCheck):
             aci_urls.append(aci_url)
 
         if len(aci_urls) == 0:
-            raise Exeption("The Cisco ACI check requires at least one url")
+            raise Exception("The Cisco ACI check requires at least one url")
 
         username = instance['username']
         pwd = instance['pwd']
@@ -66,7 +66,7 @@ class CiscoACICheck(AgentCheck):
         try:
             api.login()
         except Exception as e:
-            self.log.exception("Cannot login to the Cisco ACI: {}".format(e))
+            self.log.error("Cannot login to the Cisco ACI: {}".format(e))
             self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
                                "aci login returned a status of {}".format(e),
@@ -79,7 +79,7 @@ class CiscoACICheck(AgentCheck):
             tenant = Tenant(self, api, instance, instance_hash)
             tenant.collect()
         except Exception as e:
-            self.log.info('tenant collection failed: {}'.format(e))
+            self.log.error('tenant collection failed: {}'.format(e))
             self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
                                "aci tenant operations failed, returning a status of {}".format(e),
@@ -91,7 +91,7 @@ class CiscoACICheck(AgentCheck):
             fabric = Fabric(self, api, instance)
             fabric.collect()
         except Exception as e:
-            self.log.info('fabric collection failed: {}'.format(e))
+            self.log.error('fabric collection failed: {}'.format(e))
             self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
                                "aci fabric operations failed, returning a status of {}".format(e),
@@ -103,7 +103,7 @@ class CiscoACICheck(AgentCheck):
             capacity = Capacity(self, api, instance)
             capacity.collect()
         except Exception as e:
-            self.log.info('capacity collection failed: {}'.format(e))
+            self.log.error('capacity collection failed: {}'.format(e))
             self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
                                "aci capacity operations failed, returning a status of {}".format(e),

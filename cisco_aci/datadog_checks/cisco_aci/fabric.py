@@ -61,7 +61,6 @@ class Fabric:
 
             pod_id = helpers.get_pod_from_dn(node_attrs['dn'])
 
-
             self.log.info("processing node {} on pod {}".format(node_id, pod_id))
             self.submit_process_metric(n, tags + self.check_tags + user_tags, hostname=hostname)
             if node_attrs['role'] != "controller":

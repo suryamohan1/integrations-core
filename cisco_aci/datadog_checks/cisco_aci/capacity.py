@@ -42,9 +42,7 @@ class Capacity:
                     attr = child.get(c, {}).get('attributes', {})
                     for cisco_metric, dd_metric in metric_dict.iteritems():
                         value = attr.get(cisco_metric, 0)
-                        if hostname:
-                            tags += self.user_tags
-                        tags += self.check_tags
+                        tags += self.user_tags + self.check_tags
                         self.gauge(dd_metric, value, tags=tags, hostname=hostname)
 
     def get_contexts(self):
@@ -64,9 +62,7 @@ class Capacity:
                 tags = helpers.parse_capacity_tags(dn)
                 hostname = helpers.get_hostname_from_dn(dn)
                 value = attr.get('count', 0)
-                if hostname:
-                    tags += self.user_tags
-                tags += self.check_tags
+                tags += self.check_tags + self.user_tags
                 self.gauge(utilized_metric_name, value, tags=tags, hostname=hostname)
                 self.gauge(limit_metric_name, limit_value, tags=tags, hostname=hostname)
 
