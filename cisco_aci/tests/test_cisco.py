@@ -15,7 +15,7 @@ from datadog_checks.utils.containers import hash_mutable
 
 CHECK_NAME = 'cisco_aci'
 
-MOCKS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'mocks')
+FIXTURES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixtures')
 
 
 USERNAME = 'datadog'
@@ -37,7 +37,7 @@ class FakeSess(SessionWrapper):
         mock_path = path.replace('/', '_')
         mock_path = mock_path.replace('?', '_')
         mock_path = mock_path.replace('&', '_')
-        mock_path = os.path.join(MOCKS_DIR, mock_path)
+        mock_path = os.path.join(FIXTURES_DIR, mock_path)
         mock_path += '.txt'
 
         with open(mock_path, 'r') as f:
@@ -53,8 +53,8 @@ def aggregator():
 
 def mock_send(prepped_request, **kwargs):
     if prepped_request.path_url == '/api/aaaLogin.xml':
-        cookie_path = os.path.join(MOCKS_DIR, 'login_cookie.txt')
-        response_path = os.path.join(MOCKS_DIR, 'login.txt')
+        cookie_path = os.path.join(FIXTURES_DIR, 'login_cookie.txt')
+        response_path = os.path.join(FIXTURES_DIR, 'login.txt')
         response = Response()
         with open(cookie_path, 'r') as f:
             response.cookies = {'APIC-cookie': f.read()}
