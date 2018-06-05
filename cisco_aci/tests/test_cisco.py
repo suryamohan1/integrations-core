@@ -4,6 +4,8 @@
 
 import os
 import pytest
+import logging
+
 import simplejson as json
 from requests import Session, Response
 
@@ -12,6 +14,7 @@ from datadog_checks.cisco_aci.api import SessionWrapper, Api
 
 from datadog_checks.utils.containers import hash_mutable
 
+log = logging.getLogger('test_cisco_aci')
 
 CHECK_NAME = 'cisco_aci'
 
@@ -50,6 +53,8 @@ class FakeSess(SessionWrapper):
         mock_path = mock_path.replace('|', '_')
         mock_path = os.path.join(FIXTURES_DIR, mock_path)
         mock_path += '.txt'
+
+        log.info(os.listdir(FIXTURES_DIR))
 
         with open(mock_path, 'r') as f:
             return json.loads(f.read())['imdata']
