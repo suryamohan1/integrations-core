@@ -46,6 +46,7 @@ class FakeSess(SessionWrapper):
         mock_path = mock_path.replace(')', '_')
         mock_path = mock_path.replace('[', '_')
         mock_path = mock_path.replace(']', '_')
+        mock_path = mock_path.replace('|', '_')
         mock_path = os.path.join(FIXTURES_DIR, mock_path)
         mock_path += '.txt'
 
