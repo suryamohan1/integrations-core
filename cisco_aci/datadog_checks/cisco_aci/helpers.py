@@ -4,6 +4,14 @@
 
 import re
 
+POD_REGEX = re.compile('pod-([0-9]+)')
+BD_REGEX = re.compile('/BD-([^/]+)/')
+APP_REGEX = re.compile('/ap-([^/]+)/')
+CEP_REGEX = re.compile('/cep-([^/]+)/')
+EPG_REGEX = re.compile('/epg-([^/]+)/')
+IP_REGEX = re.compile('/ip-([^/]+)/')
+NODE_REGEX = re.compile('node-([0-9]+)')
+
 
 def parse_capacity_tags(dn):
     """
@@ -26,7 +34,7 @@ def get_pod_from_dn(dn):
     This parses the pod from a dn designator. They look like this:
     topology/pod-1/node-101/sys/phys-[eth1/6]/CDeqptMacsectxpkts5min
     """
-    pod = re.search('pod-([0-9]+)', dn)
+    pod = POD_REGEX.search(dn)
     if pod:
         return pod.group(1)
     else:
@@ -38,7 +46,7 @@ def get_bd_from_dn(dn):
     This parses the bd from the dn designator. They look like this:
     topology/pod-1/node-101/sys/phys-[eth1/6]/CDeqptMacsectxpkts5min
     """
-    bd = re.search('/BD-([^/]+)/', dn)
+    bd = BD_REGEX.search(dn)
     if bd:
         return bd.group(1)
     else:
@@ -50,7 +58,7 @@ def get_app_from_dn(dn):
     This parses the app from the dn designator. They look like this:
     uni/tn-DataDog/ap-DtDg-AP1-EcommerceApp/epg-DtDg-Ecomm/HDl2IngrPktsAg1h
     """
-    app = re.search('/ap-([^/]+)/', dn)
+    app = APP_REGEX.search(dn)
     if app:
         return app.group(1)
     else:
@@ -62,7 +70,7 @@ def get_cep_from_dn(dn):
     This parses the cep from the dn designator. They look like this:
     uni/tn-DataDog/ap-DtDg-AP1-EcommerceApp/epg-DtDg-Ecomm/HDl2IngrPktsAg1h
     """
-    cep = re.search('/cep-([^/]+)/', dn)
+    cep = CEP_REGEX.search(dn)
     if cep:
         return cep.group(1)
     else:
@@ -74,7 +82,7 @@ def get_epg_from_dn(dn):
     This parses the epg from the dn designator. They look like this:
     uni/tn-DataDog/ap-DtDg-AP1-EcommerceApp/epg-DtDg-Ecomm/HDl2IngrPktsAg1h
     """
-    epg = re.search('/epg-([^/]+)/', dn)
+    epg = EPG_REGEX.search(dn)
     if epg:
         return epg.group(1)
     else:
@@ -86,7 +94,7 @@ def get_ip_from_dn(dn):
     This parses the ip from the dn designator. They look like this:
     uni/tn-DataDog/ap-DtDg-AP1-EcommerceApp/epg-DtDg-Ecomm/HDl2IngrPktsAg1h
     """
-    ip = re.search('/ip-([^/]+)/', dn)
+    ip = IP_REGEX.search(dn)
     if ip:
         return ip.group(1)
     else:
@@ -125,7 +133,7 @@ def get_node_from_dn(dn):
     This parses the node from a dn designator. They look like this:
     topology/pod-1/node-101/sys/phys-[eth1/6]/CDeqptMacsectxpkts5min
     """
-    node = re.search('node-([0-9]+)', dn)
+    node = NODE_REGEX.search(dn)
     if node:
         return node.group(1)
     else:
