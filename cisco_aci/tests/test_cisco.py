@@ -30,7 +30,7 @@ CONFIG = {
     'username': USERNAME,
     'pwd': PASSWORD,
     'tenant': [
-        'Datadog',
+        'DataDog',
     ]
 }
 
