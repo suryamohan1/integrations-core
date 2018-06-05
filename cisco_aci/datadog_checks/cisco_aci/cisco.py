@@ -131,9 +131,9 @@ class CiscoACICheck(AgentCheck):
                     tags_to_send += self.check_tags
                 tags_to_send += user_tags + tags
                 if obj_type == "gauge":
-                    self.gauge(mname, float(mval), tags=tags, hostname=hostname)
+                    self.gauge(mname, float(mval), tags=tags_to_send, hostname=hostname)
                 elif obj_type == "rate":
-                    self.rate(mname, float(mval), tags=tags, hostname=hostname)
+                    self.rate(mname, float(mval), tags=tags_to_send, hostname=hostname)
                 else:
                     log_line = "Trying to submit metric: {} with unknown type: {}"
                     log_line = log_line.format(mname, obj_type)
