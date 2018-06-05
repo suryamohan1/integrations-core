@@ -47,7 +47,7 @@ The Cisco ACI check is packaged with the Agent, so simply [install the Agent][1]
 See [metadata.csv][5] for a list of metrics provided by this integration.
 
 ### Events
-The Cisco ACI check does not include any event at this time.
+The Cisco ACI check sends tenant faults as events.
 
 ### Service Checks
 
