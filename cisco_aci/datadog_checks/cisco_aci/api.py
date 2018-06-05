@@ -21,7 +21,7 @@ class SessionWrapper:
     def close(self):
         self.session.close()
 
-    def make_request(self, path, raw_response=False, function_name=None):
+    def make_request(self, path, raw_response=False):
         url = "{}{}".format(self.aci_url, path)
         req = Request('get', url)
         prepped = req.prepare()
@@ -78,11 +78,11 @@ class Api:
                         log=self.log)
             self.sessions.append(session_wrapper)
 
-    def make_request(self, path, raw_response=False, function_name=None):
+    def make_request(self, path, raw_response=False):
         # allow for multiple APICs in a cluster to be included in one check so that the check
         # does not bombard a single APIC with dozens of requests and cause it to slow down
         session = random.choice(self.sessions)
-        return session.make_request(path, raw_response=raw_response, function_name=function_name)
+        return session.make_request(path, raw_response=raw_response)
 
     def get_apps(self, tenant, raw_response=False):
         path = "/api/mo/uni/tn-{}.json?query-target=subtree&target-subtree-class=fvAp".format(tenant)
