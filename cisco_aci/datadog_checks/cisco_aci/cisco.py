@@ -69,7 +69,7 @@ class CiscoACICheck(AgentCheck):
             self.log.error("Cannot login to the Cisco ACI: {}".format(e))
             self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
-                               "aci login returned a status of {}".format(e),
+                               message="aci login returned a status of {}".format(e),
                                tags=service_check_tags)
             raise
 
@@ -82,7 +82,7 @@ class CiscoACICheck(AgentCheck):
             self.log.error('tenant collection failed: {}'.format(e))
             self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
-                               "aci tenant operations failed, returning a status of {}".format(e),
+                               message="aci tenant operations failed, returning a status of {}".format(e),
                                tags=service_check_tags)
             api.close()
             raise
@@ -94,7 +94,7 @@ class CiscoACICheck(AgentCheck):
             self.log.error('fabric collection failed: {}'.format(e))
             self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
-                               "aci fabric operations failed, returning a status of {}".format(e),
+                               message="aci fabric operations failed, returning a status of {}".format(e),
                                tags=service_check_tags)
             api.close()
             raise
@@ -106,7 +106,7 @@ class CiscoACICheck(AgentCheck):
             self.log.error('capacity collection failed: {}'.format(e))
             self.service_check(SERVICE_CHECK_NAME,
                                AgentCheck.CRITICAL,
-                               "aci capacity operations failed, returning a status of {}".format(e),
+                               message="aci capacity operations failed, returning a status of {}".format(e),
                                tags=service_check_tags)
             api.close()
             raise
