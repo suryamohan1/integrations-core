@@ -85,7 +85,7 @@ class Api:
             response.raise_for_status()
             apic_cookie = 'APIC-Cookie={}'.format(response.cookies.get('APIC-cookie'))
             if self._refresh_sessions:
-                session_wrapper = SessionWrapper(aci_url, session, self.apic_cookie,
+                session_wrapper = SessionWrapper(aci_url, session, apic_cookie,
                                                  verify=self.verify,
                                                  timeout=self.timeout,
                                                  log=self.log)
