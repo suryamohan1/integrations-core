@@ -56,28 +56,42 @@ class Api:
         else:
             import logging
             self.log = logging.getLogger('cisco_api')
+        # This is used in testing
+        self._refresh_sessions = True
 
     def close(self):
         for session in self.sessions:
             session.close()
 
     def login(self):
-        # ensure sessions are an empty array
-        self.sessions = []
+        # this is a path for testing, allowing the object to be patched with fake request responses
+        if self._refresh_sessions:
+            # ensure sessions are an empty array
+            self.sessions = []
         for aci_url in self.aci_urls:
-            session = Session()
+            if not self._refresh_sessions:
+                for session_wrapper in self.sessions:
+                    if session_wrapper.aci_url == aci_url:
+                        session = session_wrapper.session
+                        break
+            else:
+                session = Session()
+
             data = '<aaaUser name="{}" pwd="{}"/>\n'.format(self.username, self.password)
             url = "{}{}".format(aci_url, '/api/aaaLogin.xml')
             req = Request('post', url, data=data)
             prepped_request = req.prepare()
             response = session.send(prepped_request, verify=self.verify, timeout=self.timeout)
             response.raise_for_status()
-            self.apic_cookie = 'APIC-Cookie={}'.format(response.cookies.get('APIC-cookie'))
-            session_wrapper = SessionWrapper(aci_url, session, self.apic_cookie,
-                                             verify=self.verify,
-                                             timeout=self.timeout,
-                                             log=self.log)
-            self.sessions.append(session_wrapper)
+            apic_cookie = 'APIC-Cookie={}'.format(response.cookies.get('APIC-cookie'))
+            if self._refresh_sessions:
+                session_wrapper = SessionWrapper(aci_url, session, self.apic_cookie,
+                                                 verify=self.verify,
+                                                 timeout=self.timeout,
+                                                 log=self.log)
+                self.sessions.append(session_wrapper)
+            else:
+                session_wrapper.apic_cookie = apic_cookie
 
     def make_request(self, path, raw_response=False):
         # allow for multiple APICs in a cluster to be included in one check so that the check
