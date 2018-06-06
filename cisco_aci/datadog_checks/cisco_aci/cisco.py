@@ -17,6 +17,13 @@ from .fabric import Fabric
 from .tags import CiscoTags
 from .api import Api
 
+try:
+    # Agent >= 6.0: the check pushes tags invoking `set_external_tags`
+    from datadog_agent import set_external_tags
+except ImportError:
+    # Agent < 6.0: the Agent pulls tags invoking `CiscoACICheck.get_external_host_tags`
+    set_external_tags = None
+
 SOURCE_TYPE = 'cisco_aci'
 
 SERVICE_CHECK_NAME = 'cisco_aci.can_connect'
@@ -114,6 +121,10 @@ class CiscoACICheck(AgentCheck):
         self.service_check(SERVICE_CHECK_NAME,
                            AgentCheck.OK,
                            tags=service_check_tags)
+
+
+        if set_external_tags:
+            set_external_tags(self.get_external_host_tags())
 
         api.close()
         end = datetime.datetime.now()
