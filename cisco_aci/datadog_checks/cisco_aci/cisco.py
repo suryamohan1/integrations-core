@@ -153,6 +153,6 @@ class CiscoACICheck(AgentCheck):
     def get_external_host_tags(self):
         external_host_tags = []
         for hostname, tags in self.external_host_tags.iteritems():
-            host_tags = tags + self.default_tags + self.check_tags
+            host_tags = tags + self.check_tags
             external_host_tags.append((hostname, {SOURCE_TYPE: host_tags}))
         return external_host_tags
