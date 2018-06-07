@@ -1,3 +1,7 @@
+# (C) Datadog, Inc. 2018
+# All rights reserved
+# Licensed under a 3-clause BSD style license (see LICENSE)
+
 # stdlib
 import urlparse
 
@@ -12,10 +16,14 @@ except ImportError:
     from checks import CheckException
     from checks.prometheus_check import PrometheusCheck
 
-from config import _is_affirmative
-from util import headers
+from datadog_checks.config import _is_affirmative
+from datadog_checks.utils.headers import headers
+
 
 class GitlabCheck(PrometheusCheck):
+    """
+    Collect Gitlab metrics from Prometheus and validates that the connectivity with Gitlab
+    """
 
     # Readiness signals ability to serve traffic, liveness that Gitlab is healthy overall
     ALLOWED_SERVICE_CHECKS = ['readiness', 'liveness']
@@ -25,9 +33,11 @@ class GitlabCheck(PrometheusCheck):
 
     PROMETHEUS_SERVICE_CHECK_NAME = 'gitlab.prometheus_endpoint_up'
 
-    """
-    Collect Gitlab metrics from Prometheus and validates that the connectivity with Gitlab
-    """
+    # If we can't collect these metrics, send these metrics with their default value
+    PROMETHEUS_DEFAULT_METRICS = {
+
+    }
+
     def __init__(self, name, init_config, agentConfig, instances=None):
         super(GitlabCheck, self).__init__(name, init_config, agentConfig, instances)
         # Mapping from Prometheus metrics names to Datadog ones
@@ -42,7 +52,7 @@ class GitlabCheck(PrometheusCheck):
         self.NAMESPACE = 'gitlab'
 
     def check(self, instance):
-        #### Metrics collection
+        # Metrics collection
         endpoint = instance.get('prometheus_endpoint')
         if endpoint is None:
             raise CheckException("Unable to find prometheus_endpoint in config file.")
@@ -56,26 +66,23 @@ class GitlabCheck(PrometheusCheck):
             self.service_check(self.PROMETHEUS_SERVICE_CHECK_NAME, PrometheusCheck.OK, tags=custom_tags)
         except requests.exceptions.ConnectionError as e:
             # Unable to connect to the metrics endpoint
-            self.service_check(self.PROMETHEUS_SERVICE_CHECK_NAME, PrometheusCheck.CRITICAL,
-                               message="Unable to retrieve Prometheus metrics from endpoint %s: %s" % (endpoint, e.message), tags=custom_tags)
+            self.service_check(
+                self.PROMETHEUS_SERVICE_CHECK_NAME,
+                PrometheusCheck.CRITICAL,
+                message="Unable to retrieve Prometheus metrics from endpoint %s: %s" % (endpoint, e.message),
+                tags=custom_tags,
+            )
 
-        #### Service check to check Gitlab's health endpoints
+        # Service check to check Gitlab's health endpoints
         for check_type in self.ALLOWED_SERVICE_CHECKS:
             self._check_health_endpoint(instance, check_type, custom_tags)
 
-
     def _verify_ssl(self, instance):
-        ## Load the ssl configuration
-        ssl_params = {
-            'ssl_cert_validation': _is_affirmative(instance.get('ssl_cert_validation', True)),
-            'ssl_ca_certs': instance.get('ssl_ca_certs'),
-        }
+        # Load the ssl configuration
+        ssl_cert_validation = _is_affirmative(instance.get('ssl_cert_validation', True)),
+        ssl_ca_certs = instance.get('ssl_ca_certs', True)
 
-        for key, param in ssl_params.items():
-            if param is None:
-                del ssl_params[key]
-
-        return ssl_params.get('ssl_ca_certs', True) if ssl_params['ssl_cert_validation'] else False
+        return ssl_ca_certs if ssl_cert_validation else False
 
     def _service_check_tags(self, url):
         parsed_url = urlparse.urlparse(url)
@@ -105,11 +112,13 @@ class GitlabCheck(PrometheusCheck):
         service_check_tags.extend(tags)
         verify_ssl = self._verify_ssl(instance)
 
-        ## Timeout settings
-        timeouts = (int(instance.get('connect_timeout', GitlabCheck.DEFAULT_CONNECT_TIMEOUT)),
-                    int(instance.get('receive_timeout', GitlabCheck.DEFAULT_RECEIVE_TIMEOUT)))
+        # Timeout settings
+        timeouts = (
+            int(instance.get('connect_timeout', GitlabCheck.DEFAULT_CONNECT_TIMEOUT)),
+            int(instance.get('receive_timeout', GitlabCheck.DEFAULT_RECEIVE_TIMEOUT)),
+        )
 
-        ## Auth settings
+        # Auth settings
         auth = None
         if 'gitlab_user' in instance and 'gitlab_password' in instance:
             auth = (instance['gitlab_user'], instance['gitlab_password'])
@@ -121,26 +130,36 @@ class GitlabCheck(PrometheusCheck):
 
         try:
             self.log.debug('checking %s against %s' % (check_type, check_url))
-            r = requests.get(check_url, auth=auth, verify=verify_ssl, timeout=timeouts,
-                             headers=headers(self.agentConfig))
+            r = requests.get(
+                check_url, auth=auth, verify=verify_ssl, timeout=timeouts, headers=headers(self.agentConfig)
+            )
             if r.status_code != 200:
-                self.service_check(service_check_name, PrometheusCheck.CRITICAL,
-                                   message="Got %s when hitting %s" % (r.status_code, check_url),
-                                   tags=service_check_tags)
+                self.service_check(
+                    service_check_name,
+                    PrometheusCheck.CRITICAL,
+                    message="Got %s when hitting %s" % (r.status_code, check_url),
+                    tags=service_check_tags,
+                )
                 raise Exception("Http status code {0} on check_url {1}".format(r.status_code, check_url))
             else:
                 r.raise_for_status()
 
         except requests.exceptions.Timeout:
             # If there's a timeout
-            self.service_check(service_check_name, PrometheusCheck.CRITICAL,
-                               message="Timeout when hitting %s" % check_url,
-                               tags=service_check_tags)
+            self.service_check(
+                service_check_name,
+                PrometheusCheck.CRITICAL,
+                message="Timeout when hitting %s" % check_url,
+                tags=service_check_tags,
+            )
             raise
         except Exception as e:
-            self.service_check(service_check_name, PrometheusCheck.CRITICAL,
-                               message="Error hitting %s. Error: %s" % (check_url, e.message),
-                               tags=service_check_tags)
+            self.service_check(
+                service_check_name,
+                PrometheusCheck.CRITICAL,
+                message="Error hitting %s. Error: %s" % (check_url, e.message),
+                tags=service_check_tags,
+            )
             raise
         else:
             self.service_check(service_check_name, PrometheusCheck.OK, tags=service_check_tags)
